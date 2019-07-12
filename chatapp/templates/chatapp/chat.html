@@ -17,7 +17,7 @@ body {
 
 .chat_window {
   position: absolute;
-  width: calc(100% - 20px);
+  width: calc(25% - 20px);
   max-width: 800px;
   height: 500px;
   border-radius: 10px;
@@ -209,6 +209,7 @@ body {
 <body>
 
 
+<!-- <form id="form" method="post"> -->
 	{% csrf_token %}
 	<div class="chat_window">
 	    <div class="top_menu">
@@ -238,6 +239,7 @@ body {
 	        </div>
 	    </li>
 	</div>
+<!-- </form> -->
 
 
 <script type="text/javascript">
@@ -258,7 +260,7 @@ body {
         }(this);
         return this;
     };
-    $(function (msg) {
+    $(function () {
         var getMessageText, message_side, sendMessage;
         message_side = 'right';
         getMessageText = function () {
@@ -282,38 +284,40 @@ body {
             return $messages.animate({ scrollTop: $messages.prop('scrollHeight') }, 300);
         };
         $('.send_message').click(function (e) {
-          sendMessage($('.message_input').val())
-              $.ajax({
-          method: "POST",
-          url: "{% url 'chat' %}",
-          data: $('.message_input').serialize()
-        })
-          .done(function( msg ) {
-            var data = JSON.parse(msg)
-            // alert(data.message);
-            sendMessage(data.message)
-        });
+          $.ajax({
+              method: "POST",
+              url: "{% url 'chat' %}",
+              data: $('.message_input').serialize()
+            })
+              .done(function( msg ) {
+                var data = JSON.parse(msg)
+                sendMessage(data.message)
+            });
             return sendMessage(getMessageText());
         });
         $('.message_input').keyup(function (e) {
             if (e.which === 13) {
-              sendMessage($('.message_input').val())
             	$.ajax({
-				  method: "POST",
-				  url: "{% url 'chat' %}",
-				  data: $('.message_input').serialize()
-				})
-				  .done(function( msg ) {
-				  	var data = JSON.parse(msg)
-				  	// alert(data.message);
-            sendMessage(data.message)
-				});
+    				  method: "POST",
+    				  url: "{% url 'chat' %}",
+    				  data: $('.message_input').serialize()
+    				})
+    				  .done(function( msg ) {
+    				  	var data = JSON.parse(msg)
+                sendMessage(data.message)
+    				});
 
+            	// $('#form').submit();
                 return sendMessage(getMessageText());
             }
         });
         sendMessage('Hello Welcome to Chat !');
-        
+        setTimeout(function () {
+            // return sendMessage('Hi Sandy! How are you?');
+        }, 1000);
+        return setTimeout(function () {
+            // return sendMessage('I\'m fine, thank you!');
+        }, 2000);
     });
 }.call(this)); 
 </script>
