@@ -2,7 +2,7 @@ from django.shortcuts import render , redirect
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-from . forms import IssueDetailsForm
+from . forms import IssueDetailsForm, SignUpForm
 from . models import IssueDetails
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -75,3 +75,22 @@ def login_user(request):
 def logout_user(request):
 	logout(request)
 	return redirect('login')
+
+
+def signup_user(request):
+	logout(request)
+	username = password = ''
+	if request.method == 'POST':
+		username = request.POST['username']
+		email = request.POST['email']
+		password = request.POST['password1']
+		re_password = request.POST['password2']
+		print('----------------',username,email,password,re_password)
+		if password == re_password:
+			new_user = User(username=username, password=password, email=email)
+			new_user.set_password(password)
+			new_user.save()
+			return redirect('/')
+
+		
+	return render(request, 'chatapp/signup.html')
