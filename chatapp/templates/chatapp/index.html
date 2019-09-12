@@ -1,0 +1,126 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static '/css/index.css' %}">
+
+
+
+<!--===============================================================================================-->  
+  <link rel="icon" type="image/png" href="{% static '/images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="{% static '/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="{% static '/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="{% static '/fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="{% static '/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->  
+  <link rel="stylesheet" type="text/css" href="{% static '/vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="{% static '/vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="{% static '/vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->  
+  <link rel="stylesheet" type="text/css" href="{% static '/vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="{% static '/css/util.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
+<!--===============================================================================================-->
+<script src='{% static "/icons/icons.js" %}'></script>
+   
+</head>
+
+<body id="body" style="background-image:url({% static '/images/bothand.jpg' %});">
+
+<!-- header start -->
+
+{% if user %}
+
+<div id="header" class="container-fluid">
+    <header>
+      <div class="col-md-4">
+      <img src="{% static '/images/skylex.png' %}" width="30%">
+      </div>
+
+     <div class="col-md-4" style="text-align: center;">
+     <h2 id="header-text">Skylex Technologies Assistant</h2>
+     </div>
+
+     <div class="col-md-4" id="profile"><h4  style='font-size:15px; color: #FFA07A  ' class='fas fa-user-alt'></h4>  <a id="profile-link" >  {{user}}</a>
+
+     <a id="signout" href="{% url 'logout' %}" style="color: blue; background-color: lavender" class="btn-sm">
+     Log out
+     </a>
+
+     </div>
+    </header>
+    
+</div>
+
+{% else %}
+
+<div id="header" class="container-fluid">
+    <header>
+      <div class="col-md-4">
+      <img src="{% static '/images/skylex.png' %}" width="30%">
+      </div>
+      <div class="col-md-4" style="text-align: center;">
+     <h2 id="header-text">Skylex Technologies Assistant</h2>
+     </div>
+     <div class="col-md-4">  </div>
+    </header>
+</div>
+
+{% endif %}
+
+<!-- header end -->
+
+
+
+{% block content %}
+
+{% endblock %}
+
+
+<!-- footer start -->
+
+<div id="footer">
+    <footer style="color: black">&copy Skylex Technologies Pvt Ltd</footer>
+</div>
+
+<!-- footer end -->
+
+
+
+<!--===============================================================================================-->
+  <script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+  <script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+  <script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+  <script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+  <script src="{% static 'vendor/daterangepicker/moment.min.js' %}"></script>
+  <script src="{% static 'vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+  <script src="{% static 'vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+  <script src="{% static 'js/main.js' %}"></script>
+
+  <script type="text/javascript">
+    $('#signout').hide();
+    $(document).ready(function(){
+       $("#profile-link").click(function() {
+           $('#signout').toggle();
+       });  
+    });
+  </script>
+</body>
+</html>
